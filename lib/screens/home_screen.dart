@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {},
         icon: const Icon(
           Icons.tv,
-          color: Colors.white,
+          color: Colors.red,
         ),
       ),
       actions: <Widget>[

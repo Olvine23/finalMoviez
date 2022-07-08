@@ -1,10 +1,14 @@
 import 'dart:convert';
+import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:moviez/models/shows.dart';
 import 'package:moviez/screens/details_screen.dart';
 import 'package:moviez/services/services.dart';
+import 'package:shimmer/shimmer.dart';
 
 // list of shows
 
@@ -23,7 +27,12 @@ class SeriesList extends StatelessWidget {
           );
         }
         if (projectSnap.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator.adaptive());
+          return  Shimmer.fromColors(
+            
+            child: Container(height: 100,width: 50), 
+          
+          baseColor: Colors.grey, highlightColor: Colors.white);
+
         }
 
         return moviebuilder(
@@ -44,8 +53,10 @@ Widget moviebuilder(dynamic data) {
     var allshow = finalJson.map((e) => Mod.fromJson(e)).toList();
 
     return GridView.builder(
+      
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
+        mainAxisExtent: 320,
         crossAxisSpacing: 4.0,
         mainAxisSpacing: 4.0,
       ),
@@ -61,6 +72,7 @@ Widget moviebuilder(dynamic data) {
                 MaterialPageRoute(
                   builder: (context) => DetailScreen(
                     id: allshow[index].id,
+                    status: allshow[index].status,
                     showposter: allshow[index].image.original,
                     name: allshow[index].name,
                     rating: allshow[index].rating.average,
@@ -68,37 +80,45 @@ Widget moviebuilder(dynamic data) {
                   ),
                 )),
             child: SizedBox(
-              height: 200,
+            
               child: Column(
                 children: [
                   Container(
                     alignment: Alignment.center,
                     child: Container(
-                        width: 250,
-                        height: 120,
+                        width: 300,
+                        height: 250,
+                        
+          
+                        
+                           decoration: BoxDecoration(   
+                                      borderRadius: BorderRadius.circular(22),
 
-                        // child: Image.network(
-                        //   allshow[index].image.original,
-                        //   fit: BoxFit.cover,
-                        //   errorBuilder: (BuildContext context, Object exception,
-                        //       StackTrace? stackTrace) {
-                        //     if (kDebugMode) {
-                        //       print("Exception >> ${exception.toString()}");
-                        //     }
-                        //     return Image.asset('assets/images/poster_1.jpg');
-                        //   },
-                        // ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                            "assets/images/poster_1.jpg",
-                            fit: BoxFit.cover,
-                          ),
+                                      image: DecorationImage(
+
+                                        image: CachedNetworkImageProvider(
+                                          allshow[index].image.medium
+                                          
+                                        ),
+                                        // image: NetworkImage( allshow[index].image.medium,),
+                                        //whatever image you can put here
+                                        fit: BoxFit.cover,
+                                      ),
+                        // child: ClipRRect(
+                        //   borderRadius: BorderRadius.circular(15),
+                        //   child: Image.asset(
+                        //     "assets/images/poster_3.jpg",
+                        //     fit: BoxFit.cover,
+                        //   ),
+                        // 
+                        // 
+                        // 
                         )),
                   ),
+                  SizedBox(height: 10,),
                   Text(
                     allshow[index].name,
-                    style: TextStyle(color: Colors.white),
+                    style:  GoogleFonts.lato(textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white))
                   )
                 ],
               ),

@@ -31,6 +31,11 @@ dependencies:
     sdk: flutter
   http:
   flutter_profile_picture:
+  google_fonts:
+  shimmer:
+  flutter_html:
+  cached_network_image:
+  transparent_image:
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryList extends StatefulWidget {
   const CategoryList({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class _CategoryListState extends State<CategoryList> {
 
   int selected_category = 0;
 
-  List<String> categories = ["In theatre ", "Box Office " , "Coming Soon" , "Kenyan Special"];
+  List<String> categories = ["All Shows ", "Box Office " , "Coming Soon" , "Kenyan Special"];
   @override
   Widget build(BuildContext context) {
 
@@ -41,7 +42,7 @@ class _CategoryListState extends State<CategoryList> {
          child: Column(
            crossAxisAlignment: CrossAxisAlignment.start,
            children: [
-             Text(categories[index], style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.w600 , color: index == selected_category ? Colors.black : Colors.black.withOpacity(0.4) ),),
+             Text(categories[index], style:  GoogleFonts.lato( fontWeight: FontWeight.bold, fontSize: 20, textStyle: TextStyle(color: index == selected_category ? Colors.white : Colors.grey),),) , 
              Container(margin: const EdgeInsets.symmetric(vertical: 10), height: 6, width: 40, decoration: BoxDecoration(
                color:  index == selected_category ? Colors.red : Colors.transparent,
                borderRadius: BorderRadius.circular(10)
