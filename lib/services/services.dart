@@ -1,14 +1,21 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 
 class ApiServices {
   // get all shows
   static Future<List<Object>> fetchallShows() async {
+    // try{
     var res = await http.get(
       Uri.parse("https://api.tvmaze.com/shows"),
     );
     var list = [res.body, res.statusCode];
 
     return list;
+    // } on SocketException{
+    //   throw  Exception("N");
+
+    // }
   }
 
   // get a searched show
@@ -17,6 +24,21 @@ class ApiServices {
       Uri.parse("https://api.tvmaze.com/search/shows?q=$query"),
     );
     var list = [res.body, res.statusCode];
+
+    return list;
+  }
+
+  //get show episodes
+
+  static Future<List<Object>> fetchEpisodes() async{
+    var res  = await http.get(
+      Uri.parse("https://api.tvmaze.com/shows/1/episodes" )
+    );
+
+    var list = [res.body , res.statusCode];
+
+    // ignore: avoid_print
+    print(list[0]);
 
     return list;
   }

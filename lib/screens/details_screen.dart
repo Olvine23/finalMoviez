@@ -195,8 +195,10 @@ class DetailScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Html(data: description ,style:{
                 'p':Style(
-                  color: Colors.white24,
-                  fontSize: FontSize.large),
+                  color: primary_color,
+                  fontSize: FontSize.large,
+                  fontFamily:  '${GoogleFonts.mukta()}'
+                  ),
 
               },),
               // child: Text(

@@ -17,28 +17,39 @@ class SeriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: ApiServices.fetchallShows(),
-      builder: (context, projectSnap) {
-        if (projectSnap.connectionState == ConnectionState.none) {
-          //print('project snapshot data is: ${projectSnap.data}');
-          return const Center(
-            child: Text("No show available right now"),
+    return Center(
+      child: FutureBuilder(
+        future: ApiServices.fetchallShows(),
+        builder: (context, projectSnap) {
+          if (projectSnap.connectionState == ConnectionState.none) {
+            //print('project snapshot data is: ${projectSnap.data}');
+            return const Center(
+              child: Text("No show available right now"),
+            );
+          }
+          if (projectSnap.connectionState == ConnectionState.waiting) {
+            return  const  Center(
+
+              child: CircularProgressIndicator(),
+
+            );
+
+          }
+          if(projectSnap.hasError){
+            return Center(
+              child: Row(
+                children: [
+                  Text("Damnit No Internet", style: TextStyle(fontSize: 30, color: Colors.white),),
+                  Icon(Icons.emoji_flags , color: Colors.red, size: 20,)
+                ],
+              ),
+            );
+          }
+          return moviebuilder(
+            projectSnap.data,
           );
-        }
-        if (projectSnap.connectionState == ConnectionState.waiting) {
-          return  Shimmer.fromColors(
-            
-            child: Container(height: 100,width: 50), 
-          
-          baseColor: Colors.grey, highlightColor: Colors.white);
-
-        }
-
-        return moviebuilder(
-          projectSnap.data,
-        );
-      },
+        },
+      ),
     );
   }
 }
@@ -54,9 +65,10 @@ Widget moviebuilder(dynamic data) {
 
     return GridView.builder(
       
+      
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisExtent: 320,
+        mainAxisExtent: 250,
         crossAxisSpacing: 4.0,
         mainAxisSpacing: 4.0,
       ),
@@ -86,8 +98,8 @@ Widget moviebuilder(dynamic data) {
                   Container(
                     alignment: Alignment.center,
                     child: Container(
-                        width: 300,
-                        height: 250,
+                        width: 200,
+                        height: 150,
                         
           
                         
@@ -97,28 +109,22 @@ Widget moviebuilder(dynamic data) {
                                       image: DecorationImage(
 
                                         image: CachedNetworkImageProvider(
+                                          
                                           allshow[index].image.medium
+                                          
                                           
                                         ),
                                         // image: NetworkImage( allshow[index].image.medium,),
                                         //whatever image you can put here
                                         fit: BoxFit.cover,
                                       ),
-                        // child: ClipRRect(
-                        //   borderRadius: BorderRadius.circular(15),
-                        //   child: Image.asset(
-                        //     "assets/images/poster_3.jpg",
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        // 
-                        // 
-                        // 
+                         
                         )),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Text(
                     allshow[index].name,
-                    style:  GoogleFonts.lato(textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white))
+                    style:  GoogleFonts.lato(textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white))
                   )
                 ],
               ),

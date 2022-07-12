@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:moviez/base_config.dart';
 import 'package:moviez/screens/home_screen.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           // ignore: prefer_const_constructors
           textTheme: TextTheme(
 
-            headline5: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)
+            headline5: const TextStyle(fontWeight: FontWeight.bold, color: primary_color)
           )
           ,
           primarySwatch: Colors.grey,
