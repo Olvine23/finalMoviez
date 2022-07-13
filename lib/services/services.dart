@@ -42,4 +42,18 @@ class ApiServices {
 
     return list;
   }
+
+  //get cast details
+
+  static Future<List<Object>> fetchCast() async {
+    var res = await http.get(
+      Uri.parse("https://api.tvmaze.com/shows/1/cast")
+    );
+
+    var list = [res.body, res.statusCode];
+
+    return list;
+  }
 }
+
+

@@ -17,38 +17,44 @@ class SeriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: FutureBuilder(
-        future: ApiServices.fetchallShows(),
-        builder: (context, projectSnap) {
-          if (projectSnap.connectionState == ConnectionState.none) {
-            //print('project snapshot data is: ${projectSnap.data}');
-            return const Center(
-              child: Text("No show available right now"),
-            );
-          }
-          if (projectSnap.connectionState == ConnectionState.waiting) {
-            return  const  Center(
+    return RefreshIndicator(
+      onRefresh: () {  
 
-              child: CircularProgressIndicator(),
-
+        return ApiServices.fetchallShows();
+      },
+      child: Center(
+        child: FutureBuilder(
+          future: ApiServices.fetchallShows(),
+          builder: (context, projectSnap) {
+            if (projectSnap.connectionState == ConnectionState.none) {
+              //print('project snapshot data is: ${projectSnap.data}');
+              return const Center(
+                child: Text("No show available right now"),
+              );
+            }
+            if (projectSnap.connectionState == ConnectionState.waiting) {
+              return  const  Center(
+    
+                child: CircularProgressIndicator(),
+    
+              );
+    
+            }
+            if(projectSnap.hasError){
+              return Center(
+                child: Row(
+                  children: [
+                    const Text("Damnit No Internet", style: TextStyle(fontSize: 30, color: Colors.white),),
+                    const Icon(Icons.emoji_flags , color: Colors.red, size: 20,)
+                  ],
+                ),
+              );
+            }
+            return moviebuilder(
+              projectSnap.data,
             );
-
-          }
-          if(projectSnap.hasError){
-            return Center(
-              child: Row(
-                children: [
-                  Text("Damnit No Internet", style: TextStyle(fontSize: 30, color: Colors.white),),
-                  Icon(Icons.emoji_flags , color: Colors.red, size: 20,)
-                ],
-              ),
-            );
-          }
-          return moviebuilder(
-            projectSnap.data,
-          );
-        },
+          },
+        ),
       ),
     );
   }
@@ -72,7 +78,7 @@ Widget moviebuilder(dynamic data) {
         crossAxisSpacing: 4.0,
         mainAxisSpacing: 4.0,
       ),
-      physics: ScrollPhysics(),
+      physics: const ScrollPhysics(),
       shrinkWrap: true,
       itemCount: allshow.length,
       itemBuilder: (BuildContext context, int index) {

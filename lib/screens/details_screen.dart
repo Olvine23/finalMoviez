@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moviez/base_config.dart';
+import 'package:moviez/models/cast.dart';
+import 'package:moviez/models/episodes.dart';
+import 'package:moviez/services/services.dart';
 
 class DetailScreen extends StatelessWidget {
   final int id;
@@ -32,7 +37,7 @@ class DetailScreen extends StatelessWidget {
       body: ListView(
          
         children: <Widget>[
-          Container(
+          SizedBox(
             height: size.height * 0.4,
             child: Stack(
               children: <Widget> [
@@ -43,7 +48,7 @@ class DetailScreen extends StatelessWidget {
 
                   //image section
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50)),
+                    borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(50)),
                     image:
                     
                      DecorationImage(
@@ -67,15 +72,15 @@ class DetailScreen extends StatelessWidget {
                       height: 100,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(50),
                           topLeft: Radius.circular(50)
                         ),
                         boxShadow: [
                           BoxShadow(
-                            offset: Offset(0, 5),
+                            offset: const Offset(0, 5),
                             blurRadius: 50,
-                            color: Color(0xFF12153D).withOpacity(0.2),
+                            color: const Color(0xFF12153D).withOpacity(0.2),
                           ),
                         ]
                       ),
@@ -88,8 +93,8 @@ class DetailScreen extends StatelessWidget {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.star , color: Colors.yellow, size: 30,),
-                                SizedBox(height: 5,),
+                                const Icon(Icons.star , color: Colors.yellow, size: 30,),
+                                const SizedBox(height: 5,),
                                 RichText(
                                   
                                   text: TextSpan(
@@ -98,10 +103,10 @@ class DetailScreen extends StatelessWidget {
                                    [
                                      TextSpan(
                                        text: "${rating.toString()}/",
-                                       style: TextStyle(fontWeight: FontWeight.w600)
+                                       style: const TextStyle(fontWeight: FontWeight.w600)
                                      ),
-                                     TextSpan(text: "10\n"),
-                                     TextSpan(
+                                     const TextSpan(text: "10\n"),
+                                     const TextSpan(
                                        text: "150,212",
                                        style: TextStyle(color: Colors.grey)
                                      )
@@ -207,9 +212,62 @@ class DetailScreen extends StatelessWidget {
               // ),
             ),]
           ),
+
+           FutureBuilder(
+
+           future: ApiServices.fetchCast(), 
+           builder:(context, snapshot){
+             if(snapshot.connectionState == ConnectionState.none){
+               return const Center(
+              child: Text("No show available right now"),
+            );
+             }
+            if(snapshot.connectionState == ConnectionState.waiting){
+              return  const  Center(
+
+              child: CircularProgressIndicator(),
+
+            );
+            }
+             return castBuilder(snapshot.data);
+           } , 
+           
+          
+
+           
+           )
         ],
       ),
     );
   }
 }
  
+
+ Widget castBuilder(dynamic data){
+
+   var statusCode = data[1];
+   if(statusCode == 200){
+     final finalJson = json.decode(data[0]!);
+     print(finalJson);
+
+     var allCast = finalJson.map((e) => Person.fromJson(e)).toList();
+     print(allCast);
+
+
+     return ListView.builder( shrinkWrap: true, itemCount: allCast.length, itemBuilder: ((context, index) => Text(allCast[index].name, style: TextStyle(color: Colors.white),)));
+
+     
+
+
+   }
+
+   else{
+     return Center(child: Text("$statusCode" ,style: TextStyle(color: primary_color),));
+   }
+
+ 
+
+ 
+
+
+ }
