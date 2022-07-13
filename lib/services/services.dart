@@ -54,6 +54,20 @@ class ApiServices {
 
     return list;
   }
+
+
+
+  static Future<List<Object>> fetchPoems() async {
+
+    var res = await http.get(
+      Uri.parse("https://www.poemist.com/api/v1/randompoems?ref=hackernoon.com")
+    );
+
+
+    var  list = [res.body , res.statusCode];
+    return list;
+
+  }
 }
 
 
