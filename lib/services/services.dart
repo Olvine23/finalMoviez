@@ -30,12 +30,11 @@ class ApiServices {
 
   //get show episodes
 
-  static Future<List<Object>> fetchEpisodes() async{
-    var res  = await http.get(
-      Uri.parse("https://api.tvmaze.com/shows/1/episodes" )
-    );
+  static Future<List<Object>> fetchEpisodes() async {
+    var res =
+        await http.get(Uri.parse("https://api.tvmaze.com/shows/1/episodes"));
 
-    var list = [res.body , res.statusCode];
+    var list = [res.body, res.statusCode];
 
     // ignore: avoid_print
     print(list[0]);
@@ -45,15 +44,12 @@ class ApiServices {
 
   //get cast details
 
-  static Future<List<Object>> fetchCast() async {
-    var res = await http.get(
-      Uri.parse("https://api.tvmaze.com/shows/1/cast")
-    );
+  static Future<List<Object>> fetchCast(dynamic int) async {
+    var res =
+        await http.get(Uri.parse("https://api.tvmaze.com/shows/$int/cast"));
 
     var list = [res.body, res.statusCode];
 
     return list;
   }
 }
-
-

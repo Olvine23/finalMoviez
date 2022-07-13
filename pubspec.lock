@@ -524,7 +524,7 @@ packages:
       name: video_player_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.6"
+    version: "2.3.7"
   video_player_avfoundation:
     dependency: transitive
     description:
@@ -608,7 +608,7 @@ packages:
       name: webview_flutter_wkwebview
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.8.1"
+    version: "2.9.0"
   win32:
     dependency: transitive
     description:
