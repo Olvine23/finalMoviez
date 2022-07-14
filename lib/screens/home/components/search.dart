@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:moviez/models/shows.dart';
-import 'package:moviez/screens/details_screen.dart';
+import 'package:moviez/screens/details/details_screen.dart';
 import 'package:moviez/services/services.dart';
 
 class SearchBody extends StatefulWidget {

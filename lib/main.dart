@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:moviez/base_config.dart';
-import 'package:moviez/screens/home_screen.dart';
+import 'package:moviez/screens/home/home_screen.dart';
+ 
 
 class MyHttpOverrides extends HttpOverrides {
   @override

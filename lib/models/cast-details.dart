@@ -129,7 +129,7 @@ class Person {
     required this.id,
     required this.url,
     required this.name,
-    required this.country,
+    // required this.country,
     required this.birthday,
     required this.deathday,
     required this.gender,
@@ -141,11 +141,11 @@ class Person {
   int id;
   String url;
   String name;
-  Country country;
+  // Country? country;
   DateTime? birthday;
   dynamic deathday;
   Gender? gender;
-  Image image;
+  Image? image;
   int updated;
   Links links;
 
@@ -153,7 +153,7 @@ class Person {
         id: json["id"],
         url: json["url"],
         name: json["name"],
-        country: Country.fromJson(json["country"]),
+        // country: Country.fromJson(json["country"]),
         birthday:
             json["birthday"] == null ? null : DateTime.parse(json["birthday"]),
         deathday: json["deathday"],
@@ -167,13 +167,13 @@ class Person {
         "id": id,
         "url": url,
         "name": name,
-        "country": country.toJson(),
+        // "country": country?.toJson(),
         "birthday": birthday == null
             ? null
             : "${birthday?.year.toString().padLeft(4, '0')}-${birthday?.month.toString().padLeft(2, '0')}-${birthday?.day.toString().padLeft(2, '0')}",
         "deathday": deathday,
         "gender": genderValues.reverse[gender],
-        "image": image.toJson(),
+        "image": image?.toJson(),
         "updated": updated,
         "_links": links.toJson(),
       };

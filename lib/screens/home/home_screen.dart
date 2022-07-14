@@ -3,7 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:moviez/base_config.dart';
-import 'package:moviez/screens/components/body.dart';
+import 'package:moviez/screens/home/components/body.dart';
+ 
  
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

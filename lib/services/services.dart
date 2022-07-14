@@ -52,4 +52,18 @@ class ApiServices {
 
     return list;
   }
+
+  //get images
+
+  static Future<List<Object>> fetchImages(dynamic int) async{
+
+    var res = await http.get(Uri.parse("https://api.tvmaze.com/shows/$int/images"));
+
+    var list =[res.body, res.statusCode];
+
+    return list;
+
+
+
+  }
 }

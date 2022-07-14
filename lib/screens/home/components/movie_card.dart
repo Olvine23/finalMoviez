@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moviez/models/shows.dart';
-import 'package:moviez/screens/details_screen.dart';
+import 'package:moviez/screens/details/details_screen.dart';
 import 'package:moviez/services/services.dart';
 import 'package:shimmer/shimmer.dart';
 
