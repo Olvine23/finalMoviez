@@ -24,9 +24,11 @@ class Mod {
     required this.rating,
     required this.image,
     required this.summary,
+    required this.premiered
   });
 
   dynamic id;
+  dynamic premiered;
   dynamic url;
   dynamic name;
   dynamic language;
@@ -41,6 +43,7 @@ class Mod {
   factory Mod.fromJson(Map<String, dynamic> json) => Mod(
         id: json["id"],
         url: json["url"],
+        premiered: json["premiered"],
         name: json["name"],
         language: json["language"],
         status: json["status"],

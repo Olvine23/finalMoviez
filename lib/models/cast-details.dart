@@ -158,7 +158,7 @@ class Person {
             json["birthday"] == null ? null : DateTime.parse(json["birthday"]),
         deathday: json["deathday"],
         gender: genderValues.map[json["gender"]],
-        image: Image.fromJson(json["image"]),
+        image: Image.fromJson(json["image"]) ,
         updated: json["updated"],
         links: Links.fromJson(json["_links"]),
       );

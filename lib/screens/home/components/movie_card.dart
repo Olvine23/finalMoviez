@@ -95,6 +95,7 @@ Widget moviebuilder(dynamic data) {
                     name: allshow[index].name,
                     rating: allshow[index].rating.average,
                     description: allshow[index].summary,
+                    premiered: allshow[index].premiered,
                   ),
                 )),
             child: SizedBox(

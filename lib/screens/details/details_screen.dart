@@ -16,6 +16,7 @@ import 'package:moviez/services/services.dart';
 
 class DetailScreen extends StatelessWidget {
   final int id;
+  final String premiered;
   final String status;
   final String showposter;
   final String name;
@@ -23,6 +24,7 @@ class DetailScreen extends StatelessWidget {
   final String description;
   const DetailScreen(
       {Key? key,
+      required this.premiered,
       required this.id,
       required this.showposter,
       required this.name,
@@ -184,7 +186,7 @@ class DetailScreen extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      '2000',
+                      premiered,
                       style: TextStyle(color: kTextLightColor),
                     ),
                     SizedBox(width: kDefaultPadding),

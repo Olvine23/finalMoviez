@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:moviez/base_config.dart';
 import 'package:moviez/screens/home/home_screen.dart';
  
+ 
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -39,7 +40,28 @@ class MyApp extends StatelessWidget {
           ,
           primarySwatch: Colors.grey,
         ),
-        home: const HomePage());
+        home: const HomePage()
+        //
+        //
+        //
+        //  SplashScreen(
+        //   seconds: 3,
+        //   navigateAfterSeconds: HomePage,
+        //   title: new Text(
+        //   'SplashScreen Example',
+        //   style: new TextStyle(
+        //       fontWeight: FontWeight.bold,
+        //       fontSize: 20.0,
+        //       color: Colors.white),
+        // ),
+        // backgroundColor: Colors.lightBlue[200],
+
+
+
+
+        // )
+
+        );
   }
 }
 

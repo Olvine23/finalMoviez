@@ -75,6 +75,7 @@ class _SearchBodyState extends State<SearchBody> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => DetailScreen(
+                      premiered: allshow[index].premiered,
                       status: allshow[index].status,
                       id: allshow[index].id,
                       showposter: allshow[index].image.original,
